@@ -4,6 +4,7 @@ projectPath=$(dirname $(realpath $0))
 buildPath=./build
 #compile use cmake
 buildAll () {
+	cd $projectPath && git submodule update --init
 	mkdir -p $buildPath && cd $buildPath && cmake $projectPath && make -j$(nproc)&& cd -
 }
 
