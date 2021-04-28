@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 project(leetcode)
 
-add_subdirectory(third_party/gtest)
+add_subdirectory(third_party/gtest EXCLUDE_FROM_ALL)
 
 function(leetcode_test test_file)
 	get_filename_component(test_target_name "${test_file}" NAME_WE)
