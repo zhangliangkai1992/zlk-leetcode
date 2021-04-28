@@ -14,4 +14,4 @@ function(leetcode_test test_file)
 	target_link_libraries("${test_target_name}" gtest_main)
 endfunction(leetcode_test)
 
-leetcode_test("src/demo.cc")
+leetcode_test("src/leetcode-1.cc")
