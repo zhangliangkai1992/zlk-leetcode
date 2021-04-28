@@ -1,9 +1,10 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
+projectPath=$(dirname $(realpath $0))
 buildPath=./build
 #compile use cmake
 buildAll () {
-	mkdir -p $buildPath && cd $buildPath && cmake .. && make -j$(nproc)&& cd -
+	mkdir -p $buildPath && cd $buildPath && cmake $projectPath && make -j$(nproc)&& cd -
 }
 
 runAll () {
@@ -11,11 +12,11 @@ runAll () {
 	#buildAll && find build -maxdepth 1 -type f -executable -print|bash
 }
 formatSrc () {
-	find ./src -regex '.*\.\(c\|cc\|cpp\|h\|hpp\|cxx\)' -exec clang-format -i --style=Google {} \;
+	find $projectPath/src -regex '.*\.\(c\|cc\|cpp\|h\|hpp\|cxx\)' -exec clang-format -i --style=Google {} \;
 }
 
 checkSrc () {
-	find ./src -regex '.*\.\(c\|cc\|cpp\|h\|hpp\|cxx\)' -exec cpplint {} \;
+	find $projectPath/src -regex '.*\.\(c\|cc\|cpp\|h\|hpp\|cxx\)' -exec cpplint {} \;
 }
 
 case $1 in 
