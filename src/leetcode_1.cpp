@@ -6,18 +6,20 @@
 
 #include <gtest/gtest.h>
 
+#include <unordered_map>
 #include <vector>
 
 class Solution {
  public:
   std::vector<int> twoSum(const std::vector<int>& nums, int target) {
     int sz = nums.size();
-    for (int i = 0; i < sz - 1; ++i) {
-      for (int j = i + 1; j < sz; ++j) {
-        if (nums[i] + nums[j] == target) {
-          return {i, j};
-        }
+    // value to index
+    std::unordered_map<int, int> value_index;
+    for (int i = 0; i < sz; ++i) {
+      if (value_index.count(target - nums[i]) > 0) {
+        return {value_index[target - nums[i]], i};
       }
+      value_index[nums[i]] = i;
     }
     return {-1};
   }
@@ -31,4 +33,13 @@ TEST(leetcode_1, case1) {
   EXPECT_EQ(res.size(), 2);
   EXPECT_EQ(res[0], 0);
   EXPECT_EQ(res[1], 1);
+}
+
+TEST(leetcode_1, case2) {
+  Solution s;
+  std::vector<int> nums = {3, 2, 4};
+  auto res = s.twoSum(nums, 6);
+  EXPECT_EQ(res.size(), 2);
+  EXPECT_EQ(res[0], 1);
+  EXPECT_EQ(res[1], 2);
 }
