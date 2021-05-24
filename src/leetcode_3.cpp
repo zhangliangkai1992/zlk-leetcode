@@ -14,10 +14,10 @@ class Solution {
  public:
   int lengthOfLongestSubstring(const std::string &s) {
     int size = s.size();
-    //该字符最后一次出现的位置
+    // 该字符最后一次出现的位置
     std::vector<int> char_pos(128, -1);
     int res = 0;
-    //当前最左边的字符索引
+    // 当前最左边的字符索引
     int cur_left = -1;
     for (int i = 0; i < size; ++i) {
       if (char_pos[s[i]] > cur_left) {
