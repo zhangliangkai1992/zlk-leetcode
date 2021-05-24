@@ -25,7 +25,7 @@ class Solution {
   }
 };
 
-TEST(leetcode_1, case1) {
+TEST(leetcode_1, case3) {
   Solution s;
   std::vector<int> nums = {2, 7, 11, 15};
   int target = 9;

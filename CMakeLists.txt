@@ -15,3 +15,4 @@ function(leetcode_test test_file)
 endfunction(leetcode_test)
 
 leetcode_test("src/leetcode_1.cpp")
+leetcode_test("src/leetcode_146.cpp")
