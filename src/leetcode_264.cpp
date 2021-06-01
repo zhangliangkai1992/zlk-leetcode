@@ -8,7 +8,7 @@
 class Solution {
  public:
   int nthUglyNumber(int n) {
-    std::set<int64_t > nums;
+    std::set<int64_t> nums;
     // 流的思想，取一个数最多放3个数，最少放一个数
     nums.insert(1);
     int64_t res = 0;

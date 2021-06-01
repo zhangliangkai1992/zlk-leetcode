@@ -18,7 +18,7 @@ class Solution {
     int left = 0;
     int right = heights.size() - 1;
     while (left < right) {
-        // 最宽开始
+      // 最宽开始
       int h = min(heights[left], heights[right]);
       res = max(res, h * (right - left));
       while (heights[left] <= h && left < right) ++left;
