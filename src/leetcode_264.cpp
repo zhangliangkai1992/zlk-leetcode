@@ -8,10 +8,10 @@
 class Solution {
  public:
   int nthUglyNumber(int n) {
-    std::set<long> nums;
+    std::set<int64_t > nums;
     // 流的思想，取一个数最多放3个数，最少放一个数
     nums.insert(1);
-    long res = 0;
+    int64_t res = 0;
     while (n > 0) {
       res = *nums.begin();
       --n;
@@ -20,7 +20,7 @@ class Solution {
       nums.insert(res * 5);
       nums.erase(nums.begin());
     }
-    return res;
+    return static_cast<int>(res);
   }
 };
 
