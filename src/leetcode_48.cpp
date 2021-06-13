@@ -10,20 +10,15 @@ class Solution {
   void rotate(std::vector<std::vector<int>>* mat) {
     auto& matrix = *mat;
     int n = matrix.size();
-    for (int i = 0; i < n; ++i) {
-      for (int j = 0; j < n; ++j) {
-        // 绕对角线 x + y - (n-1) = 0对称变换
-        if (i + j - (n - 1) < 0) {
-          auto i1 = (n - 1) - j;
-          auto j1 = (n - 1) - i;
-          std::swap(matrix[i][j], matrix[i1][j1]);
-        }
-      }
-    }
     int low = 0;
     int high = n - 1;
     while (low < high) {
       std::swap(matrix[low++], matrix[high--]);
+    }
+    for (int i = 0; i < n; ++i) {
+      for (int j = i + 1; j < n; ++j) {
+        std::swap(matrix[i][j], matrix[j][i]);
+      }
     }
   }
 };
