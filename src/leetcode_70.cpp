@@ -8,14 +8,14 @@
 class Solution {
  public:
   int climbStairs(int n) {
-    long a = 1;
-    long b = 1;
+    int64_t a = 1;
+    int64_t b = 1;
     for (int i = 0; i < n; ++i) {
-      long c = a + b;
+      int64_t c = a + b;
       a = b;
       b = c;
     }
-    return a;
+    return static_cast<int>(a);
   }
 };
 TEST(leetcode_70, 1) {
