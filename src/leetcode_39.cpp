@@ -15,7 +15,6 @@ class Solution {
         target + 1, std::vector<std::vector<int>>());
     res[0] = {{}};
     for (int i = 1; i <= target; ++i) {
-      std::vector<std::vector<int>> cur;
       for (auto&& n : candidates) {
         if (i >= n) {
           auto half = res[i - n];
@@ -23,12 +22,11 @@ class Solution {
             // 去重，只能往后加大于等于该值的数字
             if (v.empty() || n >= v.back()) {
               v.push_back(n);
-              cur.push_back(v);
+              res[i].push_back(v);
             }
           }
         }
       }
-      res[i] = cur;
     }
     return res[target];
   }
