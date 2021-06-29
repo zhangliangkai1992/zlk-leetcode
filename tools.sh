@@ -11,8 +11,8 @@ buildAll () {
 }
 
 runAll () {
-	buildAll && find $buildPath -maxdepth 1 -type f -executable -exec {} \;
-	#buildAll && find build -maxdepth 1 -type f -executable -print|bash
+	#buildAll && find $buildPath -maxdepth 1 -type f -executable -exec {} \;
+	buildAll && find build -maxdepth 1 -type f -executable -print|bash -e
 	echo "===================================================================================="
 	echo "RUNNING DONE"
 }
