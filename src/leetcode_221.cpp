@@ -1,7 +1,7 @@
 /**
  * @Copyright (c) 2021 The Authors All rights reserved
  * @Author: zhangliangkai
- * @create: 2021-07-10 00:09
+ * @create: 2021-07-10 00:41
  */
 #include <gtest/gtest.h>
 
@@ -35,10 +35,10 @@ class Solution {
           right[j] = m;
           iRight = j;
         }
-        res = std::max(res, (right[j] - left[j]) * height[j]);
+        res = std::max(res, std::min(right[j] - left[j], height[j]));
       }
     }
-    return res;
+    return res * res;
   }
 };
 
@@ -53,7 +53,7 @@ std::vector<std::vector<char>> convert(const std::vector<std::string>& strs) {
   }
   return res;
 }
-TEST(leetcode85, 1) {
+TEST(leetcode221, 1) {
   std::vector<std::string> matrix = {"10100", "10111", "11111", "10010"};
-  ASSERT_EQ(Solution().maximalSquare(convert(matrix)), 6);
+  ASSERT_EQ(Solution().maximalSquare(convert(matrix)), 4);
 }
