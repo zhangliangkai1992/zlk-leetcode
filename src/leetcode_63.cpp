@@ -31,5 +31,5 @@ class Solution {
 
 TEST(leetcode63, 1) {
   std::vector<std::vector<int>> grid = {{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
-  ASSERT_EQ(Solution().uniquePathWithObstacles(grid), 2);
+  ASSERT_EQ(Solution().uniquePathsWithObstacles(grid), 2);
 }
