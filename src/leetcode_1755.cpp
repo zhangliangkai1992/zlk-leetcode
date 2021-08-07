@@ -6,7 +6,6 @@
 
 #include <gtest/gtest.h>
 
-
 class Solution {
  public:
   int minAbsDifference(const std::vector<int>& nums, int goal) {
