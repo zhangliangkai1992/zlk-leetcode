@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(leetcode)
-add_compile_options(-g -Werror)
+add_compile_options(-g -Werror -fsanitize=address)
 add_subdirectory(third_party/gtest EXCLUDE_FROM_ALL)
 
 function(leetcode_test test_file)
@@ -11,7 +11,7 @@ function(leetcode_test test_file)
             PRIVATE
             "${test_file}"
             )
-    target_link_libraries("${test_target_name}" gtest_main)
+    target_link_libraries("${test_target_name}" gtest_main asan)
 endfunction(leetcode_test)
 
 leetcode_test("src/leetcode_1.cpp")
@@ -147,6 +147,7 @@ leetcode_test("src/leetcode_887.cpp")
 leetcode_test("src/leetcode_991.cpp")
 leetcode_test("src/leetcode_1206.cpp")
 leetcode_test("src/leetcode_1345.cpp")
+leetcode_test("src/leetcode_1590.cpp")
 leetcode_test("src/leetcode_1696.cpp")
 leetcode_test("src/leetcode_1755.cpp")
 leetcode_test("src/leetcode_1798.cpp")
