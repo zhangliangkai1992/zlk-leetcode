@@ -6,49 +6,36 @@
 #include <gtest/gtest.h>
 
 class Solution {
- public:
-  // 二分查找:n1左边长度l1和n2左边长度l2满足l1+l2==totalLen/2 &&
-  // n1[l1-1]<=n2[l2] && n2[l2-1]<=n1[l1]
-  double findMedianSortedArrays(const std::vector<int>& n1,
-                                const std::vector<int>& n2) {
-    auto len1 = n1.size();
-    auto len2 = n2.size();
-    if (len2 > len1) return findMedianSortedArrays(n2, n1);
-    int low = 0;
-    int high = len2;
-    int len = (len1 + len2 + 1) / 2;
-    while (low <= high) {
-      int mid = (low + high) / 2;
-      auto anotherMid = len - mid;
-      if (mid < len2 && n2[mid] < n1[anotherMid - 1]) {
-        low = mid + 1;
-      } else if (mid > 0 && n2[mid - 1] > n1[anotherMid]) {
-        high = mid - 1;
-      } else {
-        int maxLeft = 0;
-        if (mid == 0) {
-          maxLeft = n1[anotherMid - 1];
-        } else if (anotherMid == 0) {
-          maxLeft = n2[mid - 1];
-        } else {
-          maxLeft = std::max(n1[anotherMid - 1], n2[mid - 1]);
-        }
-        int minRight = 0;
-        if ((len1 + len2) & 1) {
-          return maxLeft;
-        } else {
-          if (mid == len2) {
-            minRight = n1[anotherMid];
-          } else if (anotherMid == len1) {
-            minRight = n2[mid];
-          } else {
-            minRight = std::min(n1[anotherMid], n2[mid]);
-          }
-          return (minRight + maxLeft) / 2.0;
-        }
-      }
+  using ItType = std::vector<int>::const_iterator;
+  int findKth(ItType it1, int len1, ItType it2, int len2, int k) {
+    if (len1 > len2) {
+      return findKth(it2, len2, it1, len1, k);
     }
-    return 0;
+    if (len1 == 0) {
+      return *(it2 + k - 1);
+    }
+    if (k == 1) {
+      return std::min(*it1, *it2);
+    }
+    int half = std::min(k / 2, len1);
+    int anotherHalf = k - half;
+    if (*(it1 + half - 1) < *(it2 + anotherHalf - 1)) {
+      return findKth(it1 + half, len1 - half, it2, len2, k - half);
+    } else if (*(it1 + half - 1) > *(it2 + anotherHalf - 1)) {
+      return findKth(it1, len1, it2 + anotherHalf, len2 - anotherHalf, k - anotherHalf);
+    } else {
+      return *(it1 + half - 1);
+    }
+  }
+ public:
+  double findMedianSortedArrays(const std::vector<int> &n1,
+                                const std::vector<int> &n2) {
+    int totalLen = n1.size() + n2.size();
+    if (totalLen % 2 == 1) {
+      return findKth(n1.cbegin(), n1.size(), n2.cbegin(), n2.size(), totalLen / 2 + 1);
+    }
+    return (findKth(n1.cbegin(), n1.size(), n2.cbegin(), n2.size(), totalLen / 2)
+        + findKth(n1.cbegin(), n1.size(), n2.cbegin(), n2.size(), totalLen / 2 + 1)) / 2.0;
   }
 };
 
