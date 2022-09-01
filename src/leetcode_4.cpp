@@ -22,20 +22,26 @@ class Solution {
     if (*(it1 + half - 1) < *(it2 + anotherHalf - 1)) {
       return findKth(it1 + half, len1 - half, it2, len2, k - half);
     } else if (*(it1 + half - 1) > *(it2 + anotherHalf - 1)) {
-      return findKth(it1, len1, it2 + anotherHalf, len2 - anotherHalf, k - anotherHalf);
+      return findKth(it1, len1, it2 + anotherHalf, len2 - anotherHalf,
+                     k - anotherHalf);
     } else {
       return *(it1 + half - 1);
     }
   }
+
  public:
   double findMedianSortedArrays(const std::vector<int> &n1,
                                 const std::vector<int> &n2) {
     int totalLen = n1.size() + n2.size();
     if (totalLen % 2 == 1) {
-      return findKth(n1.cbegin(), n1.size(), n2.cbegin(), n2.size(), totalLen / 2 + 1);
+      return findKth(n1.cbegin(), n1.size(), n2.cbegin(), n2.size(),
+                     totalLen / 2 + 1);
     }
-    return (findKth(n1.cbegin(), n1.size(), n2.cbegin(), n2.size(), totalLen / 2)
-        + findKth(n1.cbegin(), n1.size(), n2.cbegin(), n2.size(), totalLen / 2 + 1)) / 2.0;
+    return (findKth(n1.cbegin(), n1.size(), n2.cbegin(), n2.size(),
+                    totalLen / 2) +
+            findKth(n1.cbegin(), n1.size(), n2.cbegin(), n2.size(),
+                    totalLen / 2 + 1)) /
+           2.0;
   }
 };
 
