@@ -8,7 +8,7 @@
 #include <algorithm>
 
 class Solution {
-  int MergeSort(std::vector<long long> *pSums,
+  int MergeSort(std::vector<int64_t> *pSums,
                 int left,
                 int right,
                 int low,
@@ -28,11 +28,10 @@ class Solution {
       while (n < right && pSums->at(n) - pSums->at(i) <= high)++n;
       count += n - m;
     }
-    //std::inplace_merge(pSums->begin() + left, pSums->begin() + mid, pSums->begin() + right);
     // 归并排序
     int i1 = left;
     int i2 = mid;
-    std::vector<long long> tmpIndex;
+    std::vector<int64_t> tmpIndex;
     tmpIndex.reserve(len);
     while (i1 < mid || i2 < right) {
       if (i2 == right || (i1 < mid && pSums->at(i1) <= pSums->at(i2))) {
@@ -48,9 +47,10 @@ class Solution {
     }
     return count;
   }
+
  public:
   int countRangeSum(const std::vector<int> &nums, int low, int high) {
-    std::vector<long long> sums = {0L};
+    std::vector<int64_t> sums = {0L};
     for (auto &&n : nums) {
       sums.push_back(sums.back() + n);
     }
@@ -58,7 +58,6 @@ class Solution {
   }
 };
 TEST(leetcode, 327) {
-
   std::vector<int> nums = {2147483647, -2147483648, -1, 0};
   int low = -1;
   int high = 0;
