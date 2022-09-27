@@ -24,6 +24,4 @@ class Solution {
     return false;
   }
 };
-TEST(leetcode, 367) {
-  ASSERT_TRUE(Solution().isPerfectSquare(16));
-}
+TEST(leetcode, 367) { ASSERT_TRUE(Solution().isPerfectSquare(16)); }

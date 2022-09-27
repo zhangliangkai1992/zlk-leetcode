@@ -5,27 +5,25 @@
  */
 
 #include <gtest/gtest.h>
+
 #include <algorithm>
 
 class Solution {
-  int MergeSort(std::vector<int64_t> *pSums,
-                int left,
-                int right,
-                int low,
+  int MergeSort(std::vector<int64_t> *pSums, int left, int right, int low,
                 int high) {
     int len = right - left;
     if (len <= 1) {
       return 0;
     }
     int mid = left + len / 2;
-    int count = MergeSort(pSums, left, mid, low, high)
-        + MergeSort(pSums, mid, right, low, high);
+    int count = MergeSort(pSums, left, mid, low, high) +
+                MergeSort(pSums, mid, right, low, high);
 
     int m = mid;
     int n = mid;
     for (int i = left; i < mid; ++i) {
-      while (m < right && pSums->at(m) - pSums->at(i) < low)++m;
-      while (n < right && pSums->at(n) - pSums->at(i) <= high)++n;
+      while (m < right && pSums->at(m) - pSums->at(i) < low) ++m;
+      while (n < right && pSums->at(n) - pSums->at(i) <= high) ++n;
       count += n - m;
     }
     // 归并排序
