@@ -5,6 +5,7 @@
  */
 
 #include <gtest/gtest.h>
+
 #include <queue>
 
 class Solution {
@@ -39,9 +40,7 @@ class Solution {
 
 TEST(leetcode, 378) {
   using Matrix = std::vector<std::vector<int>>;
-  Matrix matrix = {
-      {1, 5, 9}, {10, 11, 13}, {12, 13, 15}
-  };
+  Matrix matrix = {{1, 5, 9}, {10, 11, 13}, {12, 13, 15}};
 
   int k = 8;
   ASSERT_EQ(Solution().kthSmallest(matrix, k), 13);
