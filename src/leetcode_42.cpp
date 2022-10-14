@@ -10,51 +10,55 @@
 // hard
 class Solution {
  public:
-  int trap(const std::vector<int>& height) {
-    int sz = height.size();
-    if (sz == 0) return 0;
-    std::stack<int> left;
-    for (int i = 0; i < sz; ++i) {
-      if (left.empty() || height[i] > height[left.top()]) {
-        left.push(i);
-      }
-    }
-    std::stack<int> right;
-    for (int j = sz - 1; j >= 0; --j) {
-      if (right.empty() || height[j] > height[right.top()]) {
-        right.push(j);
-      }
-    }
+  int trap(const std::vector<int> &height) {
     int res = 0;
-    for (int i = left.top(); i < right.top(); ++i) {
-      res += (height[left.top()] - height[i]);
-    }
-    int index = left.top();
-    left.pop();
-    while (!left.empty()) {
-      int top = left.top();
-      for (int i = top + 1; i < index; ++i) {
-        res += (height[top] - height[i]);
+    auto sz = height.size();
+    if (sz < 2)return res;
+    std::stack<decltype(sz)> st;
+    st.push(0);
+    for (int i = 1; i < sz; ++i) {
+      if (height[i] > height[st.top()]) {
+        st.push(i);
       }
-      index = top;
-      left.pop();
     }
-    index = right.top();
-    right.pop();
-    while (!right.empty()) {
-      int top = right.top();
-      for (int i = index + 1; i < top; ++i) {
-        res += (height[top] - height[i]);
+    auto left = st.top();
+    auto up = left;
+    st.pop();
+    while (!st.empty()) {
+      auto low = st.top();
+      st.pop();
+      for (int i = low + 1; i < up; ++i) {
+        res += height[low] - height[i];
       }
-      index = top;
-      right.pop();
+      up = low;
+    }
+    st.push(sz - 1);
+    for (int i = sz - 2; i >= 0; --i) {
+      if (height[i] > height[st.top()]) {
+        st.push(i);
+      }
+    }
+    auto right = st.top();
+    up = right;
+    st.pop();
+    while (!st.empty()) {
+      auto low = st.top();
+      st.pop();
+      for (int i = up + 1; i < low; ++i) {
+        res += height[low] - height[i];
+      }
+      up = low;
+    }
+
+    for (decltype(sz) i = left + 1; i < right; ++i) {
+      res += height[left] - height[i];
     }
     return res;
   }
 };
 
 TEST(leetcode_42, 1) {
-  std::vector<int> height = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+  std::vector<int> height = {2, 0, 2};
   auto res = Solution().trap(height);
-  EXPECT_EQ(res, 6);
+  EXPECT_EQ(res, 2);
 }
