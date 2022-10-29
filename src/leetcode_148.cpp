@@ -7,20 +7,30 @@
 
 struct ListNode {
   int val;
-  ListNode* next;
-  explicit ListNode(int x = 0, ListNode* next = nullptr) : val(x), next(next) {}
+  ListNode *next;
+  explicit ListNode(int x = 0, ListNode *next = nullptr) : val(x), next(next) {}
 };
 
-ListNode* build(const std::vector<int>& nums) {
+ListNode *build(const std::vector<int> &nums) {
   auto dummy = new ListNode;
   for (auto it = nums.rbegin(); it != nums.rend(); ++it) {
     auto node = new ListNode(*it, dummy->next);
     dummy->next = node;
   }
-  return dummy->next;
+  auto res = dummy->next;
+  delete dummy;
+  return res;
+}
+
+void FreeList(ListNode *node) {
+  while (node) {
+    auto p = node->next;
+    delete node;
+    node = p;
+  }
 }
 class Solution {
-  ListNode* merge(ListNode* l1, ListNode* l2) {
+  ListNode *merge(ListNode *l1, ListNode *l2) {
     if (!l1) {
       return l2;
     }
@@ -37,7 +47,7 @@ class Solution {
 
  public:
   // 归并排序
-  ListNode* sortList(ListNode* head) {
+  ListNode *sortList(ListNode *head) {
     if (!head || head->next == nullptr) return head;
     auto dummy = new ListNode(0, head);
     auto p = dummy;
@@ -53,6 +63,7 @@ class Solution {
     p->next = nullptr;
     auto l1 = sortList(head);
     auto l2 = sortList(half);
+    delete dummy;
     return merge(l1, l2);
   }
 };
@@ -65,4 +76,5 @@ TEST(leetcode148, 1) {
   for (int i = 0; i < expect.size(); ++i, p = p->next) {
     ASSERT_EQ(p->val, expect[i]);
   }
+  FreeList(res);
 }

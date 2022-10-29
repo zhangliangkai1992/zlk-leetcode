@@ -23,6 +23,4 @@ class Solution {
   }
 };
 
-TEST(leetcode, 204) {
-  ASSERT_EQ(Solution().countPrimes(499979), 41537);
-}
+TEST(leetcode, 204) { ASSERT_EQ(Solution().countPrimes(499979), 41537); }

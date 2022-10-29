@@ -13,7 +13,7 @@ class Solution {
   int trap(const std::vector<int> &height) {
     int res = 0;
     auto sz = height.size();
-    if (sz < 2)return res;
+    if (sz < 2) return res;
     std::stack<decltype(sz)> st;
     st.push(0);
     for (int i = 1; i < sz; ++i) {

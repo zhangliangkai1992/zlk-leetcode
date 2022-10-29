@@ -5,6 +5,7 @@
  */
 
 #include <gtest/gtest.h>
+
 #include <stack>
 
 class Solution {

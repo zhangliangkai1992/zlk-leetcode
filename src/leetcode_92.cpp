@@ -7,21 +7,30 @@
 
 struct ListNode {
   int val;
-  ListNode* next;
-  explicit ListNode(int x = 0, ListNode* next = nullptr) : val(x), next(next) {}
+  ListNode *next;
+  explicit ListNode(int x = 0, ListNode *next = nullptr) : val(x), next(next) {}
 };
 
-ListNode* build(const std::vector<int>& nums) {
+ListNode *build(const std::vector<int> &nums) {
   auto dummy = new ListNode;
   for (auto it = nums.rbegin(); it != nums.rend(); ++it) {
     auto node = new ListNode(*it, dummy->next);
     dummy->next = node;
   }
-  return dummy->next;
+  auto res = dummy->next;
+  delete dummy;
+  return res;
+}
+void FreeNode(ListNode *node) {
+  while (node) {
+    auto p = node->next;
+    delete node;
+    node = p;
+  }
 }
 class Solution {
  public:
-  ListNode* reverseBetween(ListNode* head, int left, int right) {
+  ListNode *reverseBetween(ListNode *head, int left, int right) {
     auto dummy = new ListNode(0, head);
     auto p = dummy;
     for (int i = 0; i < left - 1; ++i) {
@@ -34,7 +43,9 @@ class Solution {
       cur->next = cur->next->next;
       p->next->next = tmp;
     }
-    return dummy->next;
+    auto res = dummy->next;
+    delete dummy;
+    return res;
   }
 };
 
@@ -45,13 +56,16 @@ TEST(leetcode92, list) {
   for (int i = 0; i < nums.size(); ++i, p = p->next) {
     ASSERT_EQ(nums[i], p->val);
   }
+  FreeNode(head);
 }
 
 TEST(leetcode92, 1) {
   std::vector<int> nums = {1, 2, 3, 4, 5};
   std::vector<int> expect = {1, 4, 3, 2, 5};
-  auto p = Solution().reverseBetween(build(nums), 2, 4);
+  auto head = Solution().reverseBetween(build(nums), 2, 4);
+  auto p = head;
   for (int i = 0; i < expect.size(); ++i, p = p->next) {
     ASSERT_EQ(expect[i], p->val);
   }
+  FreeNode(head);
 }

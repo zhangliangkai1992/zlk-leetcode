@@ -8,14 +8,14 @@
 
 struct TreeNode {
   int val;
-  TreeNode* left;
-  TreeNode* right;
-  explicit TreeNode(int x = 0, TreeNode* left = nullptr,
-                    TreeNode* right = nullptr)
+  TreeNode *left;
+  TreeNode *right;
+  explicit TreeNode(int x = 0, TreeNode *left = nullptr,
+                    TreeNode *right = nullptr)
       : val(x), left(left), right(right) {}
 };
-TreeNode* build(const std::vector<int>& preorder, int plow, int phigh,
-                const std::vector<int>& inorder, int ilow, int ihigh) {
+TreeNode *build(const std::vector<int> &preorder, int plow, int phigh,
+                const std::vector<int> &inorder, int ilow, int ihigh) {
   if (plow > phigh) return nullptr;
   auto value = preorder[plow];
   auto root = new TreeNode(value);
@@ -30,15 +30,23 @@ TreeNode* build(const std::vector<int>& preorder, int plow, int phigh,
   return root;
 }
 
-TreeNode* buildTree(const std::vector<int>& preorder,
-                    const std::vector<int>& inorder) {
+TreeNode *buildTree(const std::vector<int> &preorder,
+                    const std::vector<int> &inorder) {
   int sz = preorder.size();
   return build(preorder, 0, sz - 1, inorder, 0, sz - 1);
 }
 
+void FreeTree(TreeNode *root) {
+  if (root) {
+    FreeTree(root->left);
+    FreeTree(root->right);
+    delete root;
+  }
+}
+
 class Solution {
-  void dfs(TreeNode* root, int target, std::vector<std::vector<int>>* res,
-           std::vector<int>* path) {
+  void dfs(TreeNode *root, int target, std::vector<std::vector<int>> *res,
+           std::vector<int> *path) {
     if (root == nullptr) {
       return;
     }
@@ -61,7 +69,7 @@ class Solution {
   }
 
  public:
-  std::vector<std::vector<int>> pathSum(TreeNode* root, int target) {
+  std::vector<std::vector<int>> pathSum(TreeNode *root, int target) {
     std::vector<std::vector<int>> res;
     std::vector<int> path;
     dfs(root, target, &res, &path);
@@ -83,4 +91,5 @@ TEST(leetcode113, 1) {
       ASSERT_EQ(res[i][j], expect[i][j]);
     }
   }
+  FreeTree(root);
 }

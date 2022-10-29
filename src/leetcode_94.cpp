@@ -56,6 +56,14 @@ TreeNode* buildTree(const std::vector<int>& preorder,
   int sz = preorder.size();
   return build(preorder, 0, sz - 1, inorder, 0, sz - 1);
 }
+
+void FreeTree(TreeNode* root) {
+  if (root) {
+    FreeTree(root->left);
+    FreeTree(root->right);
+    delete root;
+  }
+}
 class Solution {
  public:
   std::vector<int> inorderTraversal(TreeNode* root) {
@@ -134,4 +142,5 @@ TEST(leetcode94, 1) {
   for (int i = 0; i < post.size(); ++i) {
     ASSERT_EQ(post[i], postOrder[i]);
   }
+  FreeTree(root);
 }

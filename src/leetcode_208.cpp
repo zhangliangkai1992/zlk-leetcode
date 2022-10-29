@@ -16,9 +16,21 @@ class Trie {
     }
   };
   Node* root_;
+  void FreeNode(Node* root) {
+    if (!root) {
+      return;
+    }
+    for (auto && node : root->child) {
+      FreeNode(node);
+    }
+    delete root;
+  }
 
  public:
   Trie() { root_ = new Node; }
+  ~Trie() {
+    FreeNode(root_);
+  }
   void insert(const std::string& str) {
     auto p = root_;
     int size = str.size();

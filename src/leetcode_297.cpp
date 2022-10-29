@@ -61,9 +61,18 @@ class Codec {
     return buildTree(&preOrder);
   }
 };
+
+void FreeTree(TreeNode* root) {
+  if (root) {
+    FreeTree(root->left);
+    FreeTree(root->right);
+    delete root;
+  }
+}
 TEST(leetcode297, 1) {
   std::string data = "1 2 # # 3 4 # # 5 # # ";
   auto root = Codec().deserialize(data);
   auto res = Codec().serialize(root);
+  FreeTree(root);
   ASSERT_EQ(data, res);
 }

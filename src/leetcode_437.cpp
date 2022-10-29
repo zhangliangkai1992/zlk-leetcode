@@ -83,10 +83,18 @@ class Solution {
     return res;
   }
 };
+void FreeTreeNode(TreeNode* root) {
+  if (root) {
+    FreeTreeNode(root->right);
+    FreeTreeNode(root->left);
+    delete root;
+  }
+}
 
 TEST(leetcode437, 1) {
   std::vector<int> preorder = {10, 5, 3, 3, -2, 2, 1, -3, 11};
   std::vector<int> inorder = {3, 3, -2, 5, 2, 1, 10, -3, 11};
   auto root = buildTree(preorder, inorder);
   ASSERT_EQ(Solution().pathSum(root, 8), 3);
+  FreeTreeNode(root);
 }

@@ -6,13 +6,13 @@
 #include <gtest/gtest.h>
 struct TreeNode {
   int val;
-  TreeNode* left;
-  TreeNode* right;
-  explicit TreeNode(int x = 0, TreeNode* left = nullptr,
-                    TreeNode* right = nullptr)
+  TreeNode *left;
+  TreeNode *right;
+  explicit TreeNode(int x = 0, TreeNode *left = nullptr,
+                    TreeNode *right = nullptr)
       : val(x), left(left), right(right) {}
 };
-std::vector<int> TreePreOrder(TreeNode* root) {
+std::vector<int> TreePreOrder(TreeNode *root) {
   if (root == nullptr) return {};
   std::vector<int> res;
   res.push_back(root->val);
@@ -22,7 +22,7 @@ std::vector<int> TreePreOrder(TreeNode* root) {
   res.insert(res.end(), right.begin(), right.end());
   return res;
 }
-std::vector<int> TreeInOrder(TreeNode* root) {
+std::vector<int> TreeInOrder(TreeNode *root) {
   if (root == nullptr) return {};
   std::vector<int> res;
   auto left = TreeInOrder(root->left);
@@ -32,9 +32,17 @@ std::vector<int> TreeInOrder(TreeNode* root) {
   res.insert(res.end(), right.begin(), right.end());
   return res;
 }
+
+void FreeTree(TreeNode *root) {
+  if (root) {
+    FreeTree(root->left);
+    FreeTree(root->right);
+    delete root;
+  }
+}
 class Solution {
-  TreeNode* build(const std::vector<int>& preorder, int plow, int phigh,
-                  const std::vector<int>& inorder, int ilow, int ihigh) {
+  TreeNode *build(const std::vector<int> &preorder, int plow, int phigh,
+                  const std::vector<int> &inorder, int ilow, int ihigh) {
     if (plow > phigh) return nullptr;
     auto value = preorder[plow];
     auto root = new TreeNode(value);
@@ -50,8 +58,8 @@ class Solution {
   }
 
  public:
-  TreeNode* buildTree(const std::vector<int>& preorder,
-                      const std::vector<int>& inorder) {
+  TreeNode *buildTree(const std::vector<int> &preorder,
+                      const std::vector<int> &inorder) {
     int sz = preorder.size();
     return build(preorder, 0, sz - 1, inorder, 0, sz - 1);
   }
@@ -71,4 +79,5 @@ TEST(leetcode_105, 1) {
   for (int i = 0; i < inorder.size(); ++i) {
     EXPECT_EQ(inorder[i], expect_in[i]);
   }
+  FreeTree(t);
 }
