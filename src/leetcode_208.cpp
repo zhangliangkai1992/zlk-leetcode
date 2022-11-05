@@ -20,7 +20,7 @@ class Trie {
     if (!root) {
       return;
     }
-    for (auto && node : root->child) {
+    for (auto&& node : root->child) {
       FreeNode(node);
     }
     delete root;
@@ -28,9 +28,7 @@ class Trie {
 
  public:
   Trie() { root_ = new Node; }
-  ~Trie() {
-    FreeNode(root_);
-  }
+  ~Trie() { FreeNode(root_); }
   void insert(const std::string& str) {
     auto p = root_;
     int size = str.size();
