@@ -1,7 +1,7 @@
 /**
- * @Copyright (c) 2022 The Authors All rights reserved
+ * @Copyright (c) 2023 The Authors All rights reserved
  * @Author: zhangliangkai
- * @create: 2022-05-17 20:38
+ * @create: 2023-01-30 09:47
  */
 
 #include <gtest/gtest.h>
@@ -13,23 +13,23 @@ class Solution {
     if (nums.empty()) {
       return 0;
     }
-    auto sz = nums.size();
-    int index = 0;
-    for (int i = 1; i < sz; ++i) {
-      if (nums[index] != nums[i]) {
-        nums[++index] = nums[i];
+    int current = nums[0];
+    int nextIdx = 1;
+    for (int i = 1; i < nums.size(); ++i) {
+      if (current != nums[i]) {
+        current = nums[i];
+        nums[nextIdx++] = current;
       }
     }
-    return index + 1;
+    return nextIdx;
   }
 };
 
 TEST(leetcode, 26) {
-  std::vector<int> nums = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
-  std::vector<int> result = {0, 1, 2, 3, 4};
-  int n = result.size();
-  ASSERT_EQ(Solution().removeDuplicates(&nums), n);
-  for (int i = 0; i < n; ++i) {
-    ASSERT_EQ(result[i], nums[i]);
+  std::vector<int> nums = {1, 1, 2};
+  std::vector<int> expect = {1, 2};
+  ASSERT_EQ(Solution().removeDuplicates(&nums), expect.size());
+  for (int i = 0; i < expect.size(); ++i) {
+    ASSERT_EQ(expect[i], nums[i]);
   }
 }
