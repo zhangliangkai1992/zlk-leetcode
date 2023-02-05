@@ -7,7 +7,7 @@
 #include <gtest/gtest.h>
 
 class Solution {
-public:
+ public:
   bool search(const std::vector<int> &nums, int target) {
     int low = 0;
     int high = nums.size();
@@ -42,3 +42,4 @@ TEST(leetcode, 81) {
   bool expect = true;
   ASSERT_EQ(Solution().search(nums, target), expect);
 }
+

@@ -28,7 +28,7 @@ class Solution {
     return nums1[low1 + len1 - 1];
   }
 
-public:
+ public:
   double findMedianSortedArrays(const std::vector<int> &nums1,
                                 const std::vector<int> &nums2) {
     auto sz1 = nums1.size();
