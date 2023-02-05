@@ -8,6 +8,7 @@
 #define INCLUDE_LEETCODE_UTIL_H_
 #include <gtest/gtest.h>
 
+#include <unordered_map>
 #include <vector>
 
 void AssertVector(const std::vector<int> &n1, const std::vector<int> &n2) {
