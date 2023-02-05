@@ -18,12 +18,14 @@ runAll () {
 }
 formatSrc () {
 	find $projectPath/src -regex '.*\.\(c\|cc\|cpp\|h\|hpp\|cxx\)' -exec clang-format -i --style=Google {} \;
+	find $projectPath/include -regex '.*\.\(c\|cc\|cpp\|h\|hpp\|cxx\)' -exec clang-format -i --style=Google {} \;
 	echo "===================================================================================="
 	echo "FORMAT DONE"
 }
 
 checkSrc () {
 	find $projectPath/src -regex '.*\.\(c\|cc\|cpp\|h\|hpp\|cxx\)' -exec cpplint {} \;
+	find $projectPath/include -regex '.*\.\(c\|cc\|cpp\|h\|hpp\|cxx\)' -exec cpplint {} \;
 	echo "===================================================================================="
 	echo "CHECK DONE"
 }
