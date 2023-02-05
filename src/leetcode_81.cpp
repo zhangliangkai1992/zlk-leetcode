@@ -42,4 +42,3 @@ TEST(leetcode, 81) {
   bool expect = true;
   ASSERT_EQ(Solution().search(nums, target), expect);
 }
-
