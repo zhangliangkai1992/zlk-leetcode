@@ -27,4 +27,12 @@ void AssertMatrix(const std::vector<std::vector<int>> &m1,
   }
 }
 
+void AssertSubVectorEqual(const std::vector<int> &v1, int sz,
+                          const std::vector<int> &v2) {
+  ASSERT_LE(sz, v2.size());
+  for (int i = 0; i < sz; ++i) {
+    ASSERT_EQ(v1[i], v2[i]);
+  }
+}
+
 #endif  // INCLUDE_LEETCODE_UTIL_H_
