@@ -37,4 +37,40 @@ void AssertSubVectorEqual(const std::vector<T> &v1, int sz,
   }
 }
 
+struct ListNode {
+  int val;
+  ListNode *next;
+  explicit ListNode(int v = 0, ListNode *n = nullptr) : val(v), next(n) {}
+};
+
+ListNode *VecToList(const std::vector<int> &nums) {
+  auto header = new ListNode;
+  auto tail = header;
+  for (auto &&n : nums) {
+    auto node = new ListNode(n);
+    tail->next = node;
+    tail = node;
+  }
+  auto res = header->next;
+  delete header;
+  return res;
+}
+
+std::vector<int> ListToVec(const ListNode *l) {
+  std::vector<int> list;
+  while (l) {
+    list.push_back(l->val);
+    l = l->next;
+  }
+  return list;
+}
+
+void FreeList(ListNode *l) {
+  while (l) {
+    auto next = l->next;
+    delete l;
+    l = next;
+  }
+}
+
 #endif  // INCLUDE_LEETCODE_UTIL_H_
