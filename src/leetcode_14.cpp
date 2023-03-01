@@ -7,7 +7,7 @@
 #include <include/leetcode_util.h>
 
 class Solution {
-public:
+ public:
   std::string longestCommonPrefix(const std::vector<std::string> &strs) {
     std::string res;
     for (int i = 0; i < 200; ++i) {

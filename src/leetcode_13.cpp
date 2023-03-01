@@ -11,7 +11,7 @@ class Solution {
       {'I', 1},   {'V', 5},   {'X', 10},  {'L', 50},
       {'C', 100}, {'D', 500}, {'M', 1000}};
 
-public:
+ public:
   int romanToInt(const std::string &s) {
     int last = 0;
     int res = 0;
@@ -29,7 +29,6 @@ public:
 };
 
 TEST(leetcode, 13) {
-
   std::string s = "MMMCMXCIX";
   int expect = 3999;
   ASSERT_EQ(Solution().romanToInt(s), expect);
