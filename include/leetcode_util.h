@@ -73,4 +73,53 @@ void FreeList(ListNode *l) {
   }
 }
 
-#endif  // INCLUDE_LEETCODE_UTIL_H_
+using TreeIt = decltype(std::vector<int>().begin());
+
+struct TreeNode {
+  int val;
+  TreeNode *left;
+  TreeNode *right;
+  explicit TreeNode(int val = 0, TreeNode *left = nullptr,
+                    TreeNode *right = nullptr)
+      : val(val), left(left), right(right) {}
+};
+
+void FreeTree(TreeNode *root) {
+  if (root == nullptr) {
+    return;
+  }
+  FreeTree(root->left);
+  FreeTree(root->right);
+  delete root;
+}
+
+TreeNode *buildTree(const std::vector<int> &preOrder,
+                    const std::vector<int> &inOrder) {
+  if (preOrder.empty()) {
+    return nullptr;
+  }
+  auto len = preOrder.size();
+  auto root = new TreeNode(preOrder[0]);
+  int index = 0;
+  while (index < len) {
+    if (preOrder[0] == inOrder[index]) {
+      break;
+    }
+    ++index;
+  }
+  auto leftLen = index;
+  auto leftPreOrder =
+      std::vector<int>(preOrder.begin() + 1, preOrder.begin() + 1 + leftLen);
+  auto leftInOrder =
+      std::vector<int>(inOrder.begin(), inOrder.begin() + leftLen);
+  root->left = buildTree(leftPreOrder, leftInOrder);
+  auto rightLen = len - 1 - leftLen;
+  auto rightPreOrder =
+      std::vector<int>(preOrder.begin() + 1 + leftLen, preOrder.end());
+  auto rightInOrder =
+      std::vector<int>(inOrder.begin() + index + 1, inOrder.end());
+  root->right = buildTree(rightPreOrder, rightInOrder);
+  return root;
+}
+
+#endif // INCLUDE_LEETCODE_UTIL_H_
