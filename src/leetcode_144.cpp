@@ -5,21 +5,23 @@
  */
 
 #include <include/leetcode_util.h>
+#include <stack>
 
 class Solution {
  public:
   std::vector<int> preorderTraversal(TreeNode *root) {
-    if (!root) {
-      return {};
-    }
-    std::vector<int> res = {root->val};
-    auto left = preorderTraversal(root->left);
-    for (auto &&v : left) {
-      res.push_back(v);
-    }
-    auto right = preorderTraversal(root->right);
-    for (auto &&v : right) {
-      res.push_back(v);
+    std::vector<int> res;
+    std::stack<TreeNode *> st;
+    auto p = root;
+    while (p || !st.empty()) {
+      if (p) {
+        st.push(p);
+        res.push_back(p->val);
+        p = p->left;
+      } else {
+        p = st.top()->right;
+        st.pop();
+      }
     }
     return res;
   }
