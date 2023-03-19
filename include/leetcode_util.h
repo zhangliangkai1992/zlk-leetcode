@@ -73,8 +73,6 @@ void FreeList(ListNode *l) {
   }
 }
 
-using TreeIt = decltype(std::vector<int>().begin());
-
 struct TreeNode {
   int val;
   TreeNode *left;
@@ -122,4 +120,15 @@ TreeNode *buildTree(const std::vector<int> &preOrder,
   return root;
 }
 
+void checkSameTree(TreeNode *r1, TreeNode *r2) {
+  if (r1 == r2) {
+    return;
+  }
+  if (r1 && !r2 || !r1 && r2) {
+    ASSERT_TRUE(false);
+  }
+  ASSERT_EQ(r1->val, r2->val);
+  checkSameTree(r1->left, r2->left);
+  checkSameTree(r1->right, r2->right);
+}
 #endif // INCLUDE_LEETCODE_UTIL_H_
