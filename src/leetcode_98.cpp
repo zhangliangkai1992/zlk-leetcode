@@ -34,3 +34,4 @@ TEST(leetcode, 98) {
   ASSERT_EQ(Solution().isValidBST(root), false);
   FreeTree(root);
 }
+

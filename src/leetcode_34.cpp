@@ -30,11 +30,9 @@ class Solution {
       return {-1, -1};
     }
     int low = index - 1;
-    while (low >= 0 && nums[low] == target)
-      --low;
+    while (low >= 0 && nums[low] == target) --low;
     int high = index + 1;
-    while (high < nums.size() && nums[high] == target)
-      ++high;
+    while (high < nums.size() && nums[high] == target) ++high;
     return {low + 1, high - 1};
   }
 };

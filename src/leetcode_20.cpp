@@ -5,6 +5,7 @@
  */
 
 #include <include/leetcode_util.h>
+
 #include <stack>
 
 class Solution {
@@ -13,33 +14,33 @@ class Solution {
     std::stack<char> st;
     for (auto &&c : s) {
       switch (c) {
-      case '(':
-        st.push(c);
-        break;
-      case ')':
-        if (st.empty() || st.top() != '(') {
-          return false;
-        }
-        st.pop();
-        break;
-      case '[':
-        st.push(c);
-        break;
-      case ']':
-        if (st.empty() || st.top() != '[') {
-          return false;
-        }
-        st.pop();
-        break;
-      case '{':
-        st.push(c);
-        break;
-      case '}':
-        if (st.empty() || st.top() != '{') {
-          return false;
-        }
-        st.pop();
-        break;
+        case '(':
+          st.push(c);
+          break;
+        case ')':
+          if (st.empty() || st.top() != '(') {
+            return false;
+          }
+          st.pop();
+          break;
+        case '[':
+          st.push(c);
+          break;
+        case ']':
+          if (st.empty() || st.top() != '[') {
+            return false;
+          }
+          st.pop();
+          break;
+        case '{':
+          st.push(c);
+          break;
+        case '}':
+          if (st.empty() || st.top() != '{') {
+            return false;
+          }
+          st.pop();
+          break;
       }
     }
     return st.empty();

@@ -5,6 +5,7 @@
  */
 
 #include <include/leetcode_util.h>
+
 #include <stack>
 
 class Solution {
@@ -51,3 +52,4 @@ TEST(leetcode, 150) {
   int expect = 9;
   ASSERT_EQ(Solution().evalRPN(tokens), expect);
 }
+

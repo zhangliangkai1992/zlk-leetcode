@@ -14,8 +14,8 @@ class Solution {
   }
 
  public:
-  std::vector<std::vector<std::string>>
-  groupAnagrams(const std::vector<std::string> &strs) {
+  std::vector<std::vector<std::string>> groupAnagrams(
+      const std::vector<std::string> &strs) {
     std::vector<std::vector<std::string>> res;
     std::map<std::string, std::vector<std::string>> keyStr;
     for (auto &&s : strs) {

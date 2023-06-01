@@ -5,6 +5,7 @@
  */
 
 #include <include/leetcode_util.h>
+
 #include <stack>
 
 class Solution {
@@ -35,3 +36,4 @@ TEST(leetcode, 144) {
   AssertVector(preOrder, res);
   FreeTree(root);
 }
+

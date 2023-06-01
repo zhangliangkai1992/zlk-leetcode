@@ -131,4 +131,4 @@ void checkSameTree(TreeNode *r1, TreeNode *r2) {
   checkSameTree(r1->left, r2->left);
   checkSameTree(r1->right, r2->right);
 }
-#endif // INCLUDE_LEETCODE_UTIL_H_
+#endif  // INCLUDE_LEETCODE_UTIL_H_

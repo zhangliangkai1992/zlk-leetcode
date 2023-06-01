@@ -5,6 +5,7 @@
  */
 
 #include <include/leetcode_util.h>
+
 #include <queue>
 
 class Solution {
@@ -84,7 +85,6 @@ class Solution {
 };
 
 TEST(leetcode, 127) {
-
   std::vector<std::string> wordList = {"hot", "dot", "dog",
                                        "lot", "log", "cog"};
   auto start = "hit";

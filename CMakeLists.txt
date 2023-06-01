@@ -5,6 +5,7 @@ add_compile_options(-g -Werror -fsanitize=address)
 add_subdirectory(third_party/gtest EXCLUDE_FROM_ALL)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_EXE_LINKER_FLAGS "-fsanitize=address")
 set(SOURCE_HEADERS ${PROJECT_SOURCE_DIR}/include/leetcode_util.h)
 

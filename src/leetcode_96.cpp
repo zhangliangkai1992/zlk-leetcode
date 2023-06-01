@@ -32,3 +32,4 @@ TEST(leetcode, 96) {
   int expect = 5;
   ASSERT_EQ(Solution().numTrees(n), expect);
 }
+
