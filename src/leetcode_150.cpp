@@ -52,4 +52,3 @@ TEST(leetcode, 150) {
   int expect = 9;
   ASSERT_EQ(Solution().evalRPN(tokens), expect);
 }
-

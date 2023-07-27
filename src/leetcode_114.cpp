@@ -40,4 +40,3 @@ TEST(leetcode, 114) {
   FreeTree(expect);
   FreeTree(root);
 }
-

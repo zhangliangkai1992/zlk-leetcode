@@ -36,4 +36,3 @@ TEST(leetcode, 144) {
   AssertVector(preOrder, res);
   FreeTree(root);
 }
-
