@@ -10,7 +10,7 @@
 
 class Solution {
  public:
-  void solve(std::vector<std::vector<char>>* p_board) {
+  void solve(std::vector<std::vector<char>> *p_board) {
     auto &&board = *p_board;
     using Pos = std::pair<int, int>;
     int m = board.size();
