@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(leetcode)
-add_compile_options(-g -Werror -fsanitize=address)
+add_compile_options(-g -Werror -fsanitize=address -std=c++14)
 add_subdirectory(third_party/gtest EXCLUDE_FROM_ALL)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 

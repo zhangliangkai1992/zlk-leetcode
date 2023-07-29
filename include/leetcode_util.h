@@ -8,6 +8,7 @@
 #define INCLUDE_LEETCODE_UTIL_H_
 #include <gtest/gtest.h>
 
+#include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
