@@ -7,7 +7,7 @@
 #include <include/leetcode_util.h>
 
 class Solution {
-public:
+ public:
   int maxArea(const std::vector<int> &heights) {
     int sz = heights.size();
     std::vector<int> indexes;

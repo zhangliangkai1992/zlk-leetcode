@@ -7,7 +7,7 @@
 #include <include/leetcode_util.h>
 
 class Solution {
-public:
+ public:
   int minimumTotal(const std::vector<std::vector<int>> &triangle) {
     auto last = triangle[0];
     const int kMax = 10000000;
