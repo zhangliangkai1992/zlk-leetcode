@@ -7,7 +7,7 @@
 #include <gtest/gtest.h>
 
 class Solution {
-public:
+ public:
   int trailingZeroes(int n) {
     int twos = 0;
     int fives = 0;
