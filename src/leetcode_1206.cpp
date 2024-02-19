@@ -49,7 +49,7 @@ class Skiplist {
     while (h > 0) {
       if (p->next[h - 1] == head_) {
         --h;
-        continue;;
+        continue;
       }
       if (p->next[h - 1]->val == target) {
         return p->next[h - 1];
